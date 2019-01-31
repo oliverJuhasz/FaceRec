@@ -8,6 +8,7 @@ import Logo from "./components/logo/logo";
 import "tachyons";
 import Particles from 'react-particles-js';
 import Clarifai from "clarifai";
+import Signin from "./components/Signin/Signin"
 
 const particleOptions = {
   particles: {
@@ -77,6 +78,7 @@ class App extends Component {
           params={particleOptions}
           />
         <Navigation />
+        <Signin />
         <Logo />
         <Rank />
         <ImageLinkForm 
