@@ -6,6 +6,7 @@ import Rank from "./components/Rank/Rank";
 import Logo from "./components/logo/logo";
 import "tachyons";
 import Particles from 'react-particles-js';
+import Clarifai from "clarifai";
 
 const particleOptions = {
   particles: {
@@ -20,7 +21,9 @@ const particleOptions = {
 }
 }
 
-
+const app = new Clarifai.App({
+  apiKey: "e24c578150804dbf9b21a7d6c98014e8"
+});
 
 class App extends Component {
   constructor() {
@@ -28,11 +31,23 @@ class App extends Component {
     this.state = {
       input: ""
     }
-  }
+  };
 
   onInputChange = (event) => {
     console.log(event.target.value);
-  }
+  };
+
+  onButtonSubmit = () => {
+    console.log("click");
+    app.models.predict("e24c578150804dbf9b21a7d6c98014e8", "https://samples.clarifai.com/metro-north.jpg",
+      function(response) {
+        console.log(response);
+      },
+      function(err) {
+
+      }
+    )
+    };
 
   render() {
     return (
@@ -43,7 +58,10 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} />
+        <ImageLinkForm 
+          onInputChange={this.onInputChange} 
+          onButtonSubmit={this.onButtonSubmit} 
+        />
         {/*
         
         <FaceRecognition />*/}
