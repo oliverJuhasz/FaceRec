@@ -34,7 +34,7 @@ class App extends Component {
       input: "",
       imageUrl: "",
       box: {},
-      route: "signin"
+      route: "home"
     }
   };
 
@@ -71,6 +71,10 @@ class App extends Component {
     .catch(err =>console.log(err));
   }
 
+  onRouteChange = (route) => {
+    this.setState({route: route});
+  };
+
 
   render() {
     return (
@@ -78,9 +82,9 @@ class App extends Component {
         <Particles className="particles"
           params={particleOptions}
           />
-        <Navigation />
+        <Navigation onRouteChange={this.onRouteChange} />
         { this.state.route === "signin" 
-          ?  <Signin />
+          ?  <Signin onRouteChange={this.onRouteChange}/>
           : <div>
               <Logo />
               <Rank />
