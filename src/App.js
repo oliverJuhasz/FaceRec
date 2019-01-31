@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Navigation from "./components/navigation/navigation";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 import Rank from "./components/Rank/Rank";
 import Logo from "./components/logo/logo";
 import "tachyons";
@@ -65,9 +66,7 @@ class App extends Component {
           onInputChange={this.onInputChange} 
           onButtonSubmit={this.onButtonSubmit} 
         />
-        {/*
-        
-        <FaceRecognition />*/}
+        <FaceRecognition />
       </div>
     );
   }
