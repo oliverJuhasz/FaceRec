@@ -30,28 +30,44 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: ""
+      input: "",
+      imageUrl: "",
+      box: {},
     }
   };
 
+  calculateFaceLocation = (data) => {
+    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById("inputimage");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    console.log(width, height);
+    return {
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - (clarifaiFace.right * width),
+      bottomRow: height - (clarifaiFace.bottom_row * height),
+    }
+  }
+
+  displayFaceBox = (box) => {
+    this.setState({box: box});
+  }
+
   onInputChange = (event) => {
-    console.log(event.target.value);
+    this.setState({input: event.target.value})
   };
 
   onButtonSubmit = () => {
-    console.log("click");
+    this.setState({imageUrl: this.state.input})
     app.models
     .predict(
-    Clarifai.COLOR_MODEL,
-        // URL
-        "https://samples.clarifai.com/metro-north.jpg"
-    )
-    .then(function(response) {
-        console.log(response);
-        },
-        function(err) {// there was an error}
-    });
-      }
+    Clarifai.FACE_DETECT_MODEL,
+        this.state.input)
+    .then(response => this.calculateFaceLocation(response))
+    .catch(err =>console.log(err));
+  }
+
 
   render() {
     return (
@@ -66,7 +82,7 @@ class App extends Component {
           onInputChange={this.onInputChange} 
           onButtonSubmit={this.onButtonSubmit} 
         />
-        <FaceRecognition />
+        <FaceRecognition imageUrl={this.state.imageUrl} />
       </div>
     );
   }
