@@ -39,15 +39,18 @@ class App extends Component {
 
   onButtonSubmit = () => {
     console.log("click");
-    app.models.predict("e24c578150804dbf9b21a7d6c98014e8", "https://samples.clarifai.com/metro-north.jpg",
-      function(response) {
-        console.log(response);
-      },
-      function(err) {
-
-      }
+    app.models
+    .predict(
+    Clarifai.COLOR_MODEL,
+        // URL
+        "https://samples.clarifai.com/metro-north.jpg"
     )
-    };
+    .then(function(response) {
+        console.log(response);
+        },
+        function(err) {// there was an error}
+    });
+      }
 
   render() {
     return (
