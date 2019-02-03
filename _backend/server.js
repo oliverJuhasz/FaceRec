@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const bcrypt = require("bcrypt-nodejs")
 
 app.use(bodyParser.json());
 
