@@ -98,7 +98,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
-    fetch("https://facerec-backend.herokuapp.com/imageurl", {
+    fetch(process.env.REACT_APP_BACKEND_ADDRESS + "imageurl", {
       method: "post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -108,7 +108,7 @@ class App extends Component {
     .then(response => response.json())
     .then(response => {
       if (response) {
-        fetch("https://facerec-backend.herokuapp.com/image", {
+        fetch(process.env.REACT_APP_BACKEND_ADDRESS + "image", {
           method: "put",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
@@ -138,7 +138,6 @@ class App extends Component {
 
 
   render() {
-    console.log(process.env.REACT_APP_BACKEND_ADDRESS)
     const {isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
