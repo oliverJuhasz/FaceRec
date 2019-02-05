@@ -101,6 +101,11 @@ class Register extends React.Component {
                                 name="password"  
                                 id="password" 
                                 onChange={this.onPasswordChange}
+                                onKeyPress={event => {
+                                    if (event.key === 'Enter') {
+                                      this.onSubmitSignIn()
+                                    }
+                                  }}
                                 />
                             </div>
                         </fieldset>
