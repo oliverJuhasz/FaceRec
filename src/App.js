@@ -98,7 +98,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input})
-    fetch("https://git.heroku.com/facerec-backend.git/imageurl", {
+    fetch(process.env.BACKEND_ADDRESS + "imageurl", {
       method: "post",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
@@ -108,7 +108,7 @@ class App extends Component {
     .then(response => response.json())
     .then(response => {
       if (response) {
-        fetch("https://git.heroku.com/facerec-backend.git/image", {
+        fetch(process.env.BACKEND_ADDRESS + "image", {
           method: "put",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({
