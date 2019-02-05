@@ -6,9 +6,30 @@ class Register extends React.Component {
         this.state = {
             email: "",
             password: "",
-            name: ""
+            name: "",
+
+            emailValid: true,
+            passwordValid: true,
+            nameValid: true
         }
     };
+
+    emailValidation = () => {
+        let emailRe = /^([a-zA-Z.\-#0-9])+@[a-zA-Z]+.[a-z]{2,4}$/
+        return emailRe.test(this.state.email)
+    }
+
+    nameValidation = () => {
+        let nameRe = /^([a-zA-Z.\-#_*]){5,30}$/
+        return nameRe.test(this.state.name);
+    }
+
+
+    passValidation = () => {
+        let passRe = /(?=^[a-zA-Z0-9!&#@]{4,16}$)(?=^.*[a-zA-Z]{1,})(?=^.*[0-9]{1,})/
+        return passRe.test(this.state.password)
+
+    }
 
     onNameChange = (event) => {
         this.setState({name: event.target.value});
@@ -21,22 +42,28 @@ class Register extends React.Component {
         this.setState({password: event.target.value}) };
     
     onSubmitSignIn = () => {
-        fetch("http://localhost:3001/register", {
-            method: "post",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name
+        if (this.emailValidation() && this.passValidation() && this.nameValidation()) {
+            fetch("http://localhost:3001/register", {
+                method: "post",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    email: this.state.email,
+                    password: this.state.password,
+                    name: this.state.name
+                })
             })
-        })
-        .then(response => response.json())
-        .then(user => {
-            if (user.id) {
-                this.props.loadUser(user)
-                this.props.onRouteChange("home");
-            }
-        })
+            .then(response => response.json())
+            .then(user => {
+                if (user.id) {
+                    this.props.loadUser(user)
+                    this.props.onRouteChange("home");
+                }
+            })
+        } else {
+            this.setState.emailValid = this.emailValidation();
+            this.setState.nameValid = this.nameValidation();
+            this.setState.passValidation = this.passValidation();
+        }
     }
 
     render() {
