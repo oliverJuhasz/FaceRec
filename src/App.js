@@ -59,6 +59,10 @@ class App extends Component {
     }
   };
 
+  componentDidMount() {
+    document.title = "facerec"
+  }
+  
   loadUser = (data) => {
     this.setState({user: {
       id: data.id,
@@ -124,7 +128,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === "signout") {
-      this.setState(initialState)
+      this.setState(initialState);
     } else if (route === "home") {
       this.setState({isSignedIn: true})
     
