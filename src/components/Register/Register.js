@@ -43,7 +43,7 @@ class Register extends React.Component {
     
     onSubmitSignIn = () => {
         if (this.emailValidation() && this.passValidation() && this.nameValidation()) {
-            fetch(process.env.BACKEND_ADDRESS + "register", {
+            fetch("https://facerec-backend.herokuapp.com/register", {
                 method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({

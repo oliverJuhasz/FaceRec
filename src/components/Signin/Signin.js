@@ -18,7 +18,7 @@ class Signin extends React.Component {
     }
 
     onSubmitSignIn = () => {
-        fetch(process.env.BACKEND_ADDRESS + "signin", {
+        fetch("https://facerec-backend.herokuapp.com/signin", {
             method: "post",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
