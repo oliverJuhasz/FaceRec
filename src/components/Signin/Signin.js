@@ -60,7 +60,12 @@ class Signin extends React.Component {
                                     className="b pa2 input-reset ba bg-transparent  w-100" 
                                     type="password" 
                                     name="password"  
-                                    id="password" 
+                                    id="password"
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                          this.onSubmitSignIn()
+                                        }
+                                      }}
                                     />
                                 </div>
                             </fieldset>
