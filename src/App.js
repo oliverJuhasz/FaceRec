@@ -138,7 +138,7 @@ class App extends Component {
 
 
   render() {
-    console.log(process.env.BACKEND_ADDRESS)
+    console.log(process.env.REACT_APP_BACKEND_ADDRESS)
     const {isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
