@@ -43,7 +43,7 @@ class Register extends React.Component {
     
     onSubmitSignIn = () => {
         if (this.emailValidation() && this.passValidation() && this.nameValidation()) {
-            fetch("http://localhost:3001/register", {
+            fetch("https://nameless-thicket-90145.herokuapp.com/register", {
                 method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
