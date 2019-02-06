@@ -40,6 +40,20 @@ class Register extends React.Component {
                 if (user.id) {
                     this.props.loadUser(user)
                     this.props.onRouteChange("home");
+                } else {
+                    switch(user) {
+                        case "email invalid":
+                            alert("Invalid e-mail address format entered.");
+                            break;
+                        case "name invalid":
+                            alert("Your name should be between 5 and 30 characters, not containing numbers or symbols.");
+                            break;
+                        case "password invalid":
+                            alert("Invalid password: Your password should contain at least 4 characters and at least 1 letter (lower or uppercase) and one number");
+                            break;
+                        default:
+                            break;
+                    }
                 }
             })
         } 
